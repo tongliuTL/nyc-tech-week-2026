@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NYC Tech Week 2026 — Personal Agenda</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f5f5f7;
+      color: #1d1d1f;
+      padding: 40px 20px;
+    }
+    .container { max-width: 860px; margin: 0 auto; }
+
+    header {
+      background: #000;
+      color: #fff;
+      border-radius: 16px;
+      padding: 36px 40px;
+      margin-bottom: 32px;
+    }
+    header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+    header .meta { font-size: 14px; color: #aaa; line-height: 1.6; }
+    header .meta a { color: #64d2ff; text-decoration: none; }
+    header .profiles { margin-top: 14px; display: flex; gap: 12px; }
+    header .profiles a {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.1);
+      color: #fff; text-decoration: none;
+      border-radius: 8px; padding: 6px 14px; font-size: 13px; font-weight: 500;
+    }
+    header .profiles a:hover { background: rgba(255,255,255,0.2); }
+
+    .logistics {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 24px;
+      border-left: 4px solid #0071e3;
+    }
+    .logistics h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: #0071e3; margin-bottom: 12px; }
+    .logistics ul { list-style: none; font-size: 14px; line-height: 2; }
+    .logistics ul li::before { content: "→ "; color: #0071e3; font-weight: 600; }
+
+    .day-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.06);
+    }
+    .day-card h2 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .day-card .subtitle {
+      font-size: 13px;
+      color: #6e6e73;
+      margin-bottom: 18px;
+    }
+    .day-card .note {
+      background: #f5f5f7;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #3a3a3c;
+      margin-top: 16px;
+    }
+
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th {
+      text-align: left;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #6e6e73;
+      padding: 0 12px 10px 0;
+      border-bottom: 1px solid #e5e5ea;
+    }
+    td {
+      padding: 12px 12px 12px 0;
+      vertical-align: top;
+      border-bottom: 1px solid #f0f0f5;
+    }
+    tr:last-child td { border-bottom: none; }
+    .time { white-space: nowrap; color: #6e6e73; font-variant-numeric: tabular-nums; }
+    .event-name { font-weight: 600; }
+    .host { color: #6e6e73; font-size: 13px; }
+    .venue { color: #6e6e73; font-size: 13px; }
+    .status-approved {
+      display: inline-block;
+      background: #d1fae5;
+      color: #065f46;
+      border-radius: 6px;
+      padding: 3px 10px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .status-pending {
+      display: inline-block;
+      background: #fef3c7;
+      color: #92400e;
+      border-radius: 6px;
+      padding: 3px 10px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .status-link a {
+      color: #0071e3;
+      font-size: 12px;
+      text-decoration: none;
+    }
+
+    .priority-section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.06);
+    }
+    .priority-section h2 { font-size: 18px; font-weight: 700; margin-bottom: 18px; }
+    .priority-tag {
+      display: inline-block;
+      border-radius: 6px;
+      padding: 3px 10px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .p-red { background: #fee2e2; color: #991b1b; }
+    .p-yellow { background: #fef3c7; color: #92400e; }
+    .p-done { background: #d1fae5; color: #065f46; }
+    .p-orange { background: #ffedd5; color: #9a3412; }
+    .status-waitlist {
+      display: inline-block;
+      background: #ffedd5;
+      color: #9a3412;
+      border-radius: 6px;
+      padding: 3px 10px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .light-day {
+      background: #f9f9fb;
+      border: 1px dashed #d1d1d6;
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+      color: #6e6e73;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    .light-day h2 { font-size: 18px; font-weight: 700; color: #1d1d1f; margin-bottom: 10px; }
+    .time-range { font-size: 11px; color: #aaa; display: block; }
+    .conflict { color: #dc2626; font-size: 11px; font-weight: 600; }
+    .route-map {
+      display: flex; align-items: flex-start;
+      margin-top: 16px; background: #f9f9fb;
+      border-radius: 12px; padding: 16px 20px;
+      overflow-x: auto; gap: 0;
+    }
+    .route-stop {
+      display: flex; flex-direction: column; align-items: center;
+      min-width: 88px; text-align: center;
+    }
+    .stop-dot {
+      width: 38px; height: 38px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px; margin-bottom: 7px; flex-shrink: 0;
+    }
+    .dot-grey  { background: #e5e5ea; }
+    .dot-blue  { background: #dbeafe; }
+    .dot-green { background: #d1fae5; }
+    .dot-purple{ background: #ede9fe; }
+    .stop-name { font-size: 11px; font-weight: 700; color: #1d1d1f; line-height: 1.3; }
+    .stop-time { font-size: 10px; color: #6e6e73; margin-top: 2px; }
+    .route-leg {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: flex-start; padding-top: 17px;
+      flex: 1; min-width: 52px;
+    }
+    .leg-line {
+      width: 100%; height: 2px; background: #c7c7cc;
+      position: relative; margin-bottom: 5px;
+    }
+    .leg-line::after {
+      content: '▶'; position: absolute; right: -5px; top: -7px;
+      font-size: 10px; color: #c7c7cc;
+    }
+    .leg-info { font-size: 10px; color: #8e8e93; text-align: center; line-height: 1.3; }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>NYC Tech Week 2026 — Personal Agenda</h1>
+    <div class="meta">
+      June 1–7, 2026 &nbsp;·&nbsp; Presented by a16z &nbsp;·&nbsp; Focus: AI/LLM engineering, agent infrastructure, logistics tech<br>
+      Full calendar: <a href="https://www.tech-week.com/calendar/nyc" target="_blank">tech-week.com/calendar/nyc</a> — search event name to find registration
+    </div>
+    <div class="profiles">
+      <a href="https://github.com/tongliuTL" target="_blank">⌥ GitHub</a>
+      <a href="https://www.linkedin.com/in/drtongliu/" target="_blank">in LinkedIn</a>
+    </div>
+  </header>
+
+  <div class="logistics">
+    <h2>Logistics</h2>
+    <ul>
+      <li>Commute: Scarsdale → Grand Central (Metro-North Harlem Line, ~38 min) → subway/walk to venues</li>
+      <li>Office base: 134 Spring St, New York, NY 10012 (SoHo) — use as anchor on Tue</li>
+      <li>Rule: max 2 sessions + 1 evening per day</li>
+    </ul>
+  </div>
+
+  <!-- Monday -->
+  <div class="day-card">
+    <h2>Monday Jun 1 — Arrive via Grand Central, drift south</h2>
+    <div class="subtitle">Maersk 8:30am (Union Sq) → IBM double-header 12:30pm + 2pm (Flatiron) → optional LES evening</div>
+    <table>
+      <thead>
+        <tr><th>Time</th><th>Event</th><th>Host</th><th>Venue</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="time">8:30am <span class="time-range">–10:30am</span></td>
+          <td><div class="event-name">⭐⭐ <a href="https://partiful.com/e/iDvWUNFiXJGuAHCBID5O" target="_blank">Maersk presents: The Future of Supply Chain</a></div></td>
+          <td class="host">Rock Yard Ventures + Maersk</td>
+          <td class="venue">Union Square</td>
+          <td><span class="status-approved">✅ Approved</span></td>
+        </tr>
+        <tr>
+          <td class="time">12:30pm <span class="time-range">–1:30pm</span></td>
+          <td><div class="event-name">⭐⭐ <a href="https://partiful.com/e/3WdKVdPlKG4V9vvsgNBa" target="_blank">Generative Computing Masterclass: Building Predictable, Auditable AI</a></div></td>
+          <td class="host">IBM</td>
+          <td class="venue">Flatiron</td>
+          <td><span class="status-approved">✅ Approved</span></td>
+        </tr>
+        <tr>
+          <td class="time">2:00pm <span class="time-range">–~3:30pm</span></td>
+          <td><div class="event-name">⭐ <a href="https://partiful.com/e/FHiuNwzr13e3YBI4ssUX" target="_blank">Beyond the Spec Masterclass: Engineering in the Age of Agents</a></div></td>
+          <td class="host">IBM</td>
+          <td class="venue">Flatiron</td>
+          <td><span class="status-waitlist">🟠 Pending</span></td>
+        </tr>
+        <tr>
+          <td class="time">6:30pm <span class="time-range">–9:30pm</span></td>
+          <td><div class="event-name"><a href="https://partiful.com/e/JCwSwROiFoNl6u8gm2qb" target="_blank">Official Tech Week Kickoff Party</a></div></td>
+          <td class="host">a16z + Gamma</td>
+          <td class="venue">Lower East Side</td>
+          <td><span class="status-waitlist">🟠 Waitlist</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note">GCT → Union Square (Maersk 8:30am) → walk north to Flatiron for IBM double-header (12:30pm + 2pm, same building) → subway downtown to LES (Kickoff 6:30pm). Gap 10:30am–12:30pm: grab coffee/work nearby.</div>
+    <div class="route-map">
+      <div class="route-stop">
+        <div class="stop-dot dot-grey">🏠</div>
+        <div class="stop-name">Scarsdale</div>
+        <div class="stop-time">Depart ~7:30am</div>
+      </div>
+      <div class="route-leg">
+        <div class="leg-line"></div>
+        <div class="leg-info">🚆 38 min<br>Metro-North</div>
+      </div>
+      <div class="route-stop">
+        <div class="stop-dot dot-grey">🚉</div>
+        <div class="stop-name">Grand Central</div>
+        <div class="stop-time">~8:08am</div>
+      </div>
+      <div class="route-leg">
+        <div class="leg-line"></div>
+        <div class="leg-info">🚇 15 min</div>
+      </div>
+      <div class="route-stop">
+        <div class="stop-dot dot-green">📦</div>
+        <div class="stop-name">Union Square</div>
+        <div class="stop-time">Maersk 8:30am</div>
+      </div>
+      <div class="route-leg">
+        <div class="leg-line"></div>
+        <div class="leg-info">🚶 10 min<br>+2hr gap</div>
+      </div>
+      <div class="route-stop">
+        <div class="stop-dot dot-blue">💻</div>
+        <div class="stop-name">Flatiron</div>
+        <div class="stop-time">IBM ×2<br>12:30 + 2pm</div>
+      </div>
+      <div class="route-leg">
+        <div class="leg-line"></div>
+        <div class="leg-info">🚇 20 min<br>+3hr gap</div>
+      </div>
+      <div class="route-stop">
+        <div class="stop-dot dot-purple">🎉</div>
+        <div class="stop-name">Lower East Side</div>
+        <div class="stop-time">Kickoff 6:30pm</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tuesday -->
+  <div class="day-card">
+    <h2>Tuesday Jun 2 — SoHo office base day</h2>
+    <div class="subtitle">Morning SoHo → Midtown → back to SoHo evening</div>
+    <table>
+      <thead>
+        <tr><th>Time</th><th>Event</th><th>Host</th><th>Venue</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="time">9:00am <span class="time-range">–5:00pm</span></td>
+          <td><div class="event-name">⭐ <a href="https://partiful.com/e/yZ0XKuQUzUUArbmiCNh5" target="_blank">Agentic Commerce: Build Day</a></div><span class="conflict">⚠️ Overlaps Operating MCP 4–5pm — leave early</span></td>
+          <td class="host">Tavily AI + Microsoft</td>
+          <td class="venue">SoHo</td>
+          <td><span class="status-approved">✅ Approved</span></td>
+        </tr>
+        <tr>
+          <td class="time">4:00pm <span class="time-range">–7:00pm</span></td>
+          <td><div class="event-name">⭐⭐ <a href="https://partiful.com/e/5vHvRPI0VlMQwOmQadCN" target="_blank">Operating MCP</a></div></td>
+          <td class="host">Dell Tech Capital + NVIDIA</td>
+          <td class="venue">Midtown</td>
+          <td><span class="status-waitlist">🟠 Waitlist</span></td>
+        </tr>
+        <tr>
+          <td class="time">6:00pm</td>
+          <td><div class="event-name"><a href="https://partiful.com/e/jytNb4IdG0HxwJnqDSgf" target="_blank">Cloudflare + Shopify: Build for the Agent Era</a></div></td>
+          <td class="host">Cloudflare + Shopify</td>
+          <td class="venue">SoHo</td>
+          <td><span class="status-approved">✅ Approved</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note">SoHo (Build Day 9am–3:45pm) → leave early → subway uptown for MCP (~20 min) → back to SoHo for Cloudflare 6pm. MCP ends 7pm — tight but doable for 6pm.</div>
+    <div class="route-map">
+      <div class="route-stop">
+        <div class="stop-dot dot-grey">🏠</div>
+        <div class="stop-name">Scarsdale</div>
+        <div class="stop-time">Depart ~8:00am</div>
+      </div>
+      <div class="route-leg">
+        <div class="leg-line"></div>
+        <div class="leg-info">🚆 38 min<br>Metro-North</div>
+      </div>
+      <div class="route-stop">
+        <div class="stop-dot dot-grey">🚉</div>
+        <div class="stop-name">Grand Central</div>
+        <div class="stop-time">~8:38am</div>
+      </div>
+      <div class="route-leg">
+        <div class="leg-line"></div>
+        <div class="leg-info">🚇 15 min</div>
+      </div>
+      <div class="route-stop">
+        <div class="stop-dot dot-blue">⚙️</div>
+        <div class="stop-name">SoHo</div>
+        <div class="stop-time">Build Day 9am</div>
+      </div>
+      <div class="route-leg">
+        <div class="leg-line"></div>
+        <div class="leg-info">🚇 20 min<br>leave ~3:45pm</div>
+      </div>
+      <div class="route-stop">
+        <div class="stop-dot dot-green">🌐</div>
+        <div class="stop-name">Midtown</div>
+        <div class="stop-time">MCP 4:00pm</div>
+      </div>
+      <div class="route-leg">
+        <div class="leg-line"></div>
+        <div class="leg-info">🚇 20 min</div>
+      </div>
+      <div class="route-stop">
+        <div class="stop-dot dot-purple">☁️</div>
+        <div class="stop-name">SoHo</div>
+        <div class="stop-time">Cloudflare 6pm</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wednesday -->
+  <div class="day-card">
+    <h2>Wednesday Jun 3 — Chelsea anchor day (best technical day)</h2>
+    <div class="subtitle">Architecture of Failure 10:45am → Anthropic Salon 1:30pm — all Chelsea, one commute</div>
+    <table>
+      <thead>
+        <tr><th>Time</th><th>Event</th><th>Host</th><th>Venue</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="time">10:45am <span class="time-range">–12:45pm</span></td>
+          <td><div class="event-name">⭐⭐ <a href="https://partiful.com/e/oZjPIrymA9JRf4x3t4GO" target="_blank">The Architecture of Failure: A 401-Level Masterclass on AI Agents</a></div></td>
+          <td class="host">Google for Startups</td>
+          <td class="venue">Chelsea</td>
+          <td><span class="status-approved">✅ Approved</span></td>
+        </tr>
+        <tr>
+          <td class="time">1:30pm <span class="time-range">–5:00pm</span></td>
+          <td><div class="event-name">⭐⭐ <a href="https://partiful.com/e/titPml1Nw0DKwGl9B6CF" target="_blank">Anthropic Founder Salon: Inside the AI-Native Era</a></div></td>
+          <td class="host">Anthropic</td>
+          <td class="venue">Chelsea</td>
+          <td><span class="status-waitlist">🟠 Pending</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note">Done by ~5pm. Head home from Chelsea — beat rush hour if you leave by 5:15pm.</div>
+    <div class="route-map">
+      <div class="route-stop">
+        <div class="stop-dot dot-grey">🏠</div>
+        <div class="stop-name">Scarsdale</div>
+        <div class="stop-time">Depart ~9:30am</div>
+      </div>
+      <div class="route-leg">
+        <div class="leg-line"></div>
+        <div class="leg-info">🚆 38 min<br>Metro-North</div>
+      </div>
+      <div class="route-stop">
+        <div class="stop-dot dot-grey">🚉</div>
+        <div class="stop-name">Grand Central</div>
+        <div class="stop-time">~10:08am</div>
+      </div>
+      <div class="route-leg">
+        <div class="leg-line"></div>
+        <div class="leg-info">🚇 15 min</div>
+      </div>
+      <div class="route-stop">
+        <div class="stop-dot dot-blue">🏛️</div>
+        <div class="stop-name">Chelsea</div>
+        <div class="stop-time">All day 10:45am–5pm</div>
+      </div>
+      <div class="route-leg">
+        <div class="leg-line"></div>
+        <div class="leg-info">🚆 38 min<br>Metro-North</div>
+      </div>
+      <div class="route-stop">
+        <div class="stop-dot dot-grey">🏠</div>
+        <div class="stop-name">Scarsdale</div>
+        <div class="stop-time">~5:53pm</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Thursday -->
+  <div class="day-card">
+    <h2>Thursday Jun 4 — Snowflake Cafe day</h2>
+    <div class="subtitle">Drop-in coworking + AI panels at Verci — come any time</div>
+    <table>
+      <thead>
+        <tr><th>Time</th><th>Event</th><th>Host</th><th>Venue</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="time">9:00am <span class="time-range">–5:00pm</span></td>
+          <td>
+            <div class="event-name"><a href="https://partiful.com/e/JOh4G5YjH6PW0756ISsd" target="_blank">Snowflake Cafe at Verci: Leverage AI and Snowflake to Outpace Your Competition</a> <a href="https://www.snowflake.com/tech-week-new-york-2026/" target="_blank" style="font-size:11px;color:#0071e3;font-weight:400;margin-left:6px;">↗ Event page</a></div>
+            <div style="font-size:11px;color:#6e6e73;margin-top:4px">10am panel: The New Agentic Enterprise · 12pm panel: Is It Delivering? · 2pm: Snowflake Intelligence Demo</div>
+          </td>
+          <td class="host">Snowflake</td>
+          <td class="venue">Verci, NYC</td>
+          <td><span class="status-approved">✅ Approved</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note">Drop-in format — arrive any time. Good day for 1:1 follow-ups from Mon–Wed. Also check <a href="https://www.tech-week.com/calendar/nyc/tracks/engineers" target="_blank">Engineers track</a> for Thu/Fri depth sessions.</div>
+    <div class="route-map">
+      <div class="route-stop">
+        <div class="stop-dot dot-grey">🏠</div>
+        <div class="stop-name">Scarsdale</div>
+        <div class="stop-time">Depart ~8:00am</div>
+      </div>
+      <div class="route-leg">
+        <div class="leg-line"></div>
+        <div class="leg-info">🚆 38 min<br>Metro-North</div>
+      </div>
+      <div class="route-stop">
+        <div class="stop-dot dot-grey">🚉</div>
+        <div class="stop-name">Grand Central</div>
+        <div class="stop-time">~8:38am</div>
+      </div>
+      <div class="route-leg">
+        <div class="leg-line"></div>
+        <div class="leg-info">🚇 TBD</div>
+      </div>
+      <div class="route-stop">
+        <div class="stop-dot dot-blue">☕</div>
+        <div class="stop-name">Verci, NYC</div>
+        <div class="stop-time">Café 9am–5pm</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Status board -->
+  <div class="priority-section">
+    <h2>Week at a Glance — Confirmation Status</h2>
+    <table>
+      <thead>
+        <tr><th>Day</th><th>Time</th><th>Event</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="white-space:nowrap;color:#6e6e73;font-size:13px">Mon Jun 1</td>
+          <td class="time">8:30am</td>
+          <td class="event-name"><a href="https://partiful.com/e/iDvWUNFiXJGuAHCBID5O" target="_blank">Maersk: The Future of Supply Chain</a></td>
+          <td><span class="status-approved">✅ Approved</span></td>
+        </tr>
+        <tr>
+          <td style="white-space:nowrap;color:#6e6e73;font-size:13px">Mon Jun 1</td>
+          <td class="time">12:30pm</td>
+          <td class="event-name"><a href="https://partiful.com/e/3WdKVdPlKG4V9vvsgNBa" target="_blank">Generative Computing Masterclass (IBM)</a></td>
+          <td><span class="status-approved">✅ Approved</span></td>
+        </tr>
+        <tr>
+          <td style="white-space:nowrap;color:#6e6e73;font-size:13px">Mon Jun 1</td>
+          <td class="time">2:00pm</td>
+          <td class="event-name"><a href="https://partiful.com/e/FHiuNwzr13e3YBI4ssUX" target="_blank">Beyond the Spec: Engineering in the Age of Agents (IBM)</a></td>
+          <td><span class="status-waitlist">🟠 Pending</span></td>
+        </tr>
+        <tr>
+          <td style="white-space:nowrap;color:#6e6e73;font-size:13px">Mon Jun 1</td>
+          <td class="time">6:30pm</td>
+          <td class="event-name"><a href="https://partiful.com/e/JCwSwROiFoNl6u8gm2qb" target="_blank">Official Tech Week Kickoff Party (a16z + Gamma)</a></td>
+          <td><span class="status-waitlist">🟠 Waitlist</span></td>
+        </tr>
+        <tr>
+          <td style="white-space:nowrap;color:#6e6e73;font-size:13px">Tue Jun 2</td>
+          <td class="time">9:00am</td>
+          <td class="event-name"><a href="https://partiful.com/e/yZ0XKuQUzUUArbmiCNh5" target="_blank">Agentic Commerce: Build Day (Tavily + Microsoft)</a></td>
+          <td><span class="status-approved">✅ Approved</span></td>
+        </tr>
+        <tr>
+          <td style="white-space:nowrap;color:#6e6e73;font-size:13px">Tue Jun 2</td>
+          <td class="time">4:00pm</td>
+          <td class="event-name"><a href="https://partiful.com/e/5vHvRPI0VlMQwOmQadCN" target="_blank">Operating MCP (Dell + NVIDIA)</a></td>
+          <td><span class="status-waitlist">🟠 Waitlist</span></td>
+        </tr>
+        <tr>
+          <td style="white-space:nowrap;color:#6e6e73;font-size:13px">Tue Jun 2</td>
+          <td class="time">6:00pm</td>
+          <td class="event-name"><a href="https://partiful.com/e/jytNb4IdG0HxwJnqDSgf" target="_blank">Cloudflare + Shopify: Build for the Agent Era</a></td>
+          <td><span class="status-approved">✅ Approved</span></td>
+        </tr>
+        <tr>
+          <td style="white-space:nowrap;color:#6e6e73;font-size:13px">Wed Jun 3</td>
+          <td class="time">10:45am</td>
+          <td class="event-name"><a href="https://partiful.com/e/oZjPIrymA9JRf4x3t4GO" target="_blank">Architecture of Failure: 401-Level AI Agents Masterclass</a></td>
+          <td><span class="status-approved">✅ Approved</span></td>
+        </tr>
+        <tr>
+          <td style="white-space:nowrap;color:#6e6e73;font-size:13px">Wed Jun 3</td>
+          <td class="time">1:30pm</td>
+          <td class="event-name"><a href="https://partiful.com/e/titPml1Nw0DKwGl9B6CF" target="_blank">Anthropic Founder Salon: Inside the AI-Native Era</a></td>
+          <td><span class="status-waitlist">🟠 Pending</span></td>
+        </tr>
+        <tr>
+          <td style="white-space:nowrap;color:#6e6e73;font-size:13px">Thu Jun 4</td>
+          <td class="time">9:00am</td>
+          <td class="event-name"><a href="https://partiful.com/e/JOh4G5YjH6PW0756ISsd" target="_blank">Snowflake Cafe at Verci (panels 10am, 12pm, demo 2pm + Data Room 7pm)</a></td>
+          <td><span class="status-approved">✅ Approved</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note" style="margin-top:14px">🟠 Still watching: <strong>Anthropic Salon</strong> (Wed 1:30pm) and <strong>Operating MCP</strong> (Tue 4pm) — both high-value, waiting on host decisions. IBM Beyond the Spec (Mon 2pm) also pending.</div>
+  </div>
+
+</div>
+</body>
+</html>
