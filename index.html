@@ -20,11 +20,13 @@
       border-radius: 16px;
       padding: 36px 40px;
       margin-bottom: 32px;
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 24px;
     }
+    .header-left { flex: 1; min-width: 0; }
     header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
     header .meta { font-size: 14px; color: #aaa; line-height: 1.6; }
     header .meta a { color: #64d2ff; text-decoration: none; }
-    header .profiles { margin-top: 14px; display: flex; gap: 12px; }
+    header .profiles { margin-top: 14px; display: flex; gap: 12px; flex-wrap: wrap; }
     header .profiles a {
       display: inline-flex; align-items: center; gap: 6px;
       background: rgba(255,255,255,0.1);
@@ -33,16 +35,15 @@
     }
     header .profiles a:hover { background: rgba(255,255,255,0.2); }
     .qr-wrap {
-      margin-top: 20px; display: flex; align-items: center; gap: 16px;
+      display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0;
     }
     .qr-box {
       background: #fff; border-radius: 10px; padding: 8px;
-      display: inline-block; line-height: 0; flex-shrink: 0;
+      display: inline-block; line-height: 0;
     }
     .qr-label {
-      font-size: 12px; color: #aaa; line-height: 1.5;
+      font-size: 11px; color: #888; text-align: center; line-height: 1.4;
     }
-    .qr-label strong { color: #fff; font-size: 13px; display: block; margin-bottom: 2px; }
 
     .logistics {
       background: #fff;
@@ -208,21 +209,20 @@
 <div class="container">
 
   <header>
-    <h1>NYC Tech Week 2026 — Personal Agenda</h1>
-    <div class="meta">
-      June 1–7, 2026 &nbsp;·&nbsp; Presented by a16z &nbsp;·&nbsp; Focus: AI/LLM engineering, agent infrastructure, logistics tech<br>
-      Full calendar: <a href="https://www.tech-week.com/calendar/nyc" target="_blank">tech-week.com/calendar/nyc</a> — search event name to find registration
-    </div>
-    <div class="profiles">
-      <a href="https://github.com/tongliuTL" target="_blank">⌥ GitHub</a>
-      <a href="https://www.linkedin.com/in/drtongliu/" target="_blank">in LinkedIn</a>
+    <div class="header-left">
+      <h1>NYC Tech Week 2026 — Personal Agenda</h1>
+      <div class="meta">
+        June 1–7, 2026 &nbsp;·&nbsp; Presented by a16z &nbsp;·&nbsp; Focus: AI/LLM engineering, agent infrastructure, logistics tech<br>
+        Full calendar: <a href="https://www.tech-week.com/calendar/nyc" target="_blank">tech-week.com/calendar/nyc</a> — search event name to find registration
+      </div>
+      <div class="profiles">
+        <a href="https://github.com/tongliuTL" target="_blank">⌥ GitHub</a>
+        <a href="https://www.linkedin.com/in/drtongliu/" target="_blank">in LinkedIn</a>
+      </div>
     </div>
     <div class="qr-wrap">
       <div class="qr-box" id="qr-linkedin"></div>
-      <div class="qr-label">
-        <strong>Scan to connect on LinkedIn</strong>
-        linkedin.com/in/drtongliu
-      </div>
+      <div class="qr-label">Scan to connect</div>
     </div>
   </header>
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js" integrity="sha384-3zSEDfvllQohrq0PHL1fOXJuC/jSOO34H46t6UQfobFOmxE5BpjjaIJY5F2/bMnU" crossorigin="anonymous"></script>
