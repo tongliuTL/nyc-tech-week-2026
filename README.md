@@ -27,9 +27,27 @@ GitHub Actions picks it up and the live page updates in ~60 seconds.
 
 ## Events tracked
 
-| Day | Confirmed | Pending/Waitlist |
-|---|---|---|
-| Mon Jun 1 | Maersk, IBM Generative Computing | IBM Beyond the Spec, Kickoff Party |
-| Tue Jun 2 | Agentic Commerce, Cloudflare + Shopify | Operating MCP |
-| Wed Jun 3 | Architecture of Failure | Anthropic Founder Salon |
-| Thu Jun 4 | Snowflake Cafe at Verci | — |
+| Day | Time | Event | Status |
+|---|---|---|---|
+| Mon Jun 1 | 8:30am | Maersk: The Future of Supply Chain | ✅ Approved |
+| Mon Jun 1 | 12:30pm | IBM Generative Computing Masterclass | ✅ Approved |
+| Mon Jun 1 | 2:00pm | IBM Beyond the Spec Masterclass | ✅ Approved |
+| Mon Jun 1 | 6:30pm | Tech Week Kickoff Party | ⛔ At capacity |
+| Tue Jun 2 | 9:00am | Agentic Commerce: Build Day | ✅ Approved |
+| Tue Jun 2 | 4:00pm | Operating MCP | 🟠 Waitlist |
+| Tue Jun 2 | 6:00pm | Cloudflare + Shopify: Build for the Agent Era | ✅ Approved |
+| Wed Jun 3 | 10:45am | Architecture of Failure (AI Agents Masterclass) | ✅ Approved |
+| Wed Jun 3 | 1:30pm | Anthropic Founder Salon | 🟠 Pending |
+| Thu Jun 4 | 9:00am | Snowflake Cafe at Verci | ✅ Approved |
+
+## Leave-home times
+
+Route maps in the page show exact timing sourced from MTA GTFS + OpenStreetMap routing.
+
+| Day | Leave home | Train | GCT arrive | Subway to venue |
+|---|---|---|---|---|
+| Mon Jun 1 | 6:54am | dep 7:09am | 7:46am | 4/5/6 → 14th St (15 min) |
+| Tue Jun 2 | 7:20am | dep 7:35am | 8:10am | 6 → Spring St (18 min) |
+| Wed Jun 3 | 8:59am | dep 9:14am | 9:48am | S → Times Sq → 1 (15 min) |
+| Thu Jun 4 | 7:50am | dep 8:05am | 8:38am | 4/5/6 → 23rd St (10 min) |
+
