@@ -27,6 +27,7 @@ Personal event tracker for [NYC Tech Week](https://www.tech-week.com/calendar/ny
 | Wed Jun 3 | 1:00pm | Google Ads Keynote: Future of AI Marketing | ✅ Done |
 | Wed Jun 3 | 2:30pm | Google AI Learning Lab: Build Your Own AI Agent | ✅ Done |
 | Thu Jun 4 | 9:00am | Snowflake Cafe at Verci | ✅ Done |
+| Thu Jun 4 | 1:00pm | Autonomously Improving Agent Swarms with Weights & Biases | ⬜ Skipped |
 
 ## Leave-home times
 
