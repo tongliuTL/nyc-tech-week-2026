@@ -26,8 +26,7 @@ Personal event tracker for [NYC Tech Week](https://www.tech-week.com/calendar/ny
 | Wed Jun 3 | 10:45am | Architecture of Failure: 401-Level AI Agents Masterclass | ✅ Done |
 | Wed Jun 3 | 1:00pm | Google Ads Keynote: Future of AI Marketing | ✅ Done |
 | Wed Jun 3 | 2:30pm | Google AI Learning Lab: Build Your Own AI Agent | ✅ Done |
-| Thu Jun 4 | 9:00am | Snowflake Cafe at Verci | ✅ Approved |
-| Thu Jun 4 | 1:00pm | Autonomously Improving Agent Swarms with Weights & Biases | ✅ Approved |
+| Thu Jun 4 | 9:00am | Snowflake Cafe at Verci | ✅ Done |
 
 ## Leave-home times
 
@@ -38,4 +37,4 @@ Route maps in the page show exact timing sourced from MTA GTFS + OpenStreetMap r
 | Mon Jun 1 | 6:54am | dep 7:09am | 7:46am | 4/5/6 → 14th St (~15 min) |
 | Tue Jun 2 | 7:20am | dep 7:35am | 8:10am | 6 → Spring St (~18 min) |
 | Wed Jun 3 | 8:59am | dep 9:14am | 9:48am | S → Times Sq → 1 (~15 min) |
-| Thu Jun 4 | 7:50am | dep 8:05am | 8:38am | 4/5/6 → 23rd St (~10 min) → Verci; then 4/5/6 → Brooklyn Bridge (~25 min) → W&B 1pm |
+| Thu Jun 4 | 7:50am | dep 8:05am | 8:38am | 4/5/6 → 23rd St (~10 min) → Verci |
